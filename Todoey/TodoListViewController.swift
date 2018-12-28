@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController : UITableViewController {
     
-    let itemArray = ["Compras","Libros","Viajes","Video Juegos"]
+    var itemArray = ["Compras","Libros","Viajes","Video Juegos"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,34 @@ class TodoListViewController : UITableViewController {
         
     }
     
+    //MARK - Agregar más elementos a la lista
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Agregar nuevo elemento a la lista", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Agregar elemento", style: .default) { (action) in
+           
+            self.itemArray.append(textField.text!)
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Crear un nuevo elemento"
+            print(alertTextField)
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+        
+    }
     
 }
 
